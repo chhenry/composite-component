@@ -1,0 +1,23 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<form name="mainForm" #mainForm="ngForm">
+  <div ngModelGroup="name" #nameCtrl="ngModelGroup">
+      Required <input
+      type="checkbox"
+      [checked]="required"
+      (change)="requireChange()"/>
+    <br/>
+    <app-outer name="outer" [modelGroup]="nameCtrl" [(ngModel)]="comp" [required]="required"></app-outer>
+    <br/>
+    <br/>
+    <input type="text" name="val3" [(ngModel)]="val3" required/>
+    <br/>
+    <br/>
+    Form Valid: {{mainForm.valid}}
+    <br/>
+    <br/>
+    <button (click)="doSubmit()">finish</button>
+
+  </div>
+</form>
+
+<router-outlet></router-outlet>
