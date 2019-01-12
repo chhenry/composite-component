@@ -51,14 +51,14 @@ export class OuterComponent implements OnInit, ControlValueAccessor, Validator {
       const inputsValid: boolean =
         !!this._value &&
           (
+            // all fields required
             (this.required &&
               (!!this._value.innerOne && !!this._value.innerTwo)
             )
             ||
-            (!this.required && (
-                (!this._value.innerOne && !this._value.innerTwo) ||
-                (!!this._value.innerOne && !!this._value.innerTwo)
-              )
+            // all or none fields required
+            (!this.required &&
+              !(!!this._value.innerOne !== !!this._value.innerTwo)
             )
           );
 
