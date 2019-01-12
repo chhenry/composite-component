@@ -1,3 +1,4 @@
-Cls <app-inner-one name="innerOne" [modelGroup]="modelGroup" id="innerOne" [(ngModel)]="_value" (change)="doChange()" [isRequired]="bothRequired"></app-inner-one>
-Text <app-inner-two name="innerTwo" [modelGroup]="modelGroup" id="innerTwo" [(ngModel)]="_value" (change)="doChange()" [isRequired]="bothRequired"></app-inner-two>
+<!-- unwired model group: [modelGroup]="modelGroup" -->
+Cls <app-inner-one name="innerOne"  id="innerOne" [(ngModel)]="_value" (change)="doChange()"></app-inner-one>
+Text <app-inner-two name="innerTwo" id="innerTwo" [(ngModel)]="_value" (change)="doChange()"></app-inner-two>
 

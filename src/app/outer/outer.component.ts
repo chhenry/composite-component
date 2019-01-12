@@ -22,21 +22,7 @@ import { Comp } from './outer.model';
 export class OuterComponent implements OnInit, ControlValueAccessor, Validator {
 
   _value: Comp = new Comp(null, null);
-  _required = false;
-
-  bothRequired = false;
-
-  @Input() modelGroup: NgModelGroup;
-
-  @Input()
-  set required(required: boolean) {
-    this._required = required;
-    this.bothRequired = this.required || !!this._value.innerOne || !!this._value.innerTwo;
-  }
-
-  get required() {
-    return this._required;
-  }
+  @Input() required;
 
   constructor() {
   }
@@ -56,7 +42,7 @@ export class OuterComponent implements OnInit, ControlValueAccessor, Validator {
               (!!this._value.innerOne && !!this._value.innerTwo)
             )
             ||
-            // all or none fields required
+            // or, all or none fields required
             (!this.required &&
               !(!!this._value.innerOne !== !!this._value.innerTwo)
             )
@@ -65,10 +51,7 @@ export class OuterComponent implements OnInit, ControlValueAccessor, Validator {
       return inputsValid ? null : {outer: {valid: false}};
   }
 
-  ngOnInit() {
-    // this isnt really needed with validate method
-    this.bothRequired = this.required || !!this._value.innerOne || !!this._value.innerTwo;
-  }
+  ngOnInit() { }
 
   onChange = (value: Comp) => {};
   onValidatorChange = () => {};
@@ -88,8 +71,6 @@ export class OuterComponent implements OnInit, ControlValueAccessor, Validator {
   }
 
   doChange() {
-    // both required not really needed with validate method
-    this.bothRequired = this.required || !!this._value.innerOne || !!this._value.innerTwo;
     this.onChange(this._value);
   }
 

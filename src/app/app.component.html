@@ -1,12 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <form name="mainForm" #mainForm="ngForm">
-  <div ngModelGroup="name" #nameCtrl="ngModelGroup">
       Required <input
       type="checkbox"
       [checked]="required"
       (change)="requireChange()"/>
     <br/>
-    <!-- add [modelGroup]="nameCtrl" to outer to wire in model group -->
     <app-outer name="outer" [(ngModel)]="comp" [required]="required"></app-outer>
     <br/>
     <br/>
@@ -17,8 +15,6 @@
     <br/>
     <br/>
     <button (click)="doSubmit()">finish</button>
-
-  </div>
 </form>
 
 <router-outlet></router-outlet>

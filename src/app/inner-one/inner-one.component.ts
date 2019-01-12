@@ -14,29 +14,18 @@ import { Comp } from '../outer/outer.model';
     }
   ]
 })
-export class InnerOneComponent implements OnInit, ControlValueAccessor, AfterViewChecked {
+export class InnerOneComponent implements OnInit, ControlValueAccessor {
 
   _value: Comp;
   registered = false;
 
-  @ViewChild('one') one: NgModel;
-  @Input() modelGroup: NgModelGroup;
-  @Input() isRequired: boolean;
+  // @ViewChild('one') one: NgModel;
+  // @Input() modelGroup: NgModelGroup;
+  // @Input() isRequired: boolean;
 
   constructor() {}
 
-  ngOnInit() {
-
-  }
-
-  ngAfterViewChecked() {
-    if (!this.registered) {
-      if (this.modelGroup && this.modelGroup.control && this.one) {
-        this.modelGroup.control.registerControl('one', this.one.control);
-        this.registered = true;
-      }
-    }
-  }
+  ngOnInit() {  }
 
   onChange = (value: string) => {};
 
