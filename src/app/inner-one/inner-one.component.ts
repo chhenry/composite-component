@@ -19,10 +19,6 @@ export class InnerOneComponent implements OnInit, ControlValueAccessor {
   _value: Comp;
   registered = false;
 
-  // @ViewChild('one') one: NgModel;
-  // @Input() modelGroup: NgModelGroup;
-  // @Input() isRequired: boolean;
-
   constructor() {}
 
   ngOnInit() {  }
