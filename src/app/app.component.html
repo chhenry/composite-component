@@ -6,7 +6,8 @@
       [checked]="required"
       (change)="requireChange()"/>
     <br/>
-    <app-outer name="outer" [modelGroup]="nameCtrl" [(ngModel)]="comp" [required]="required"></app-outer>
+    <!-- add [modelGroup]="nameCtrl" to outer to wire in model group -->
+    <app-outer name="outer" [(ngModel)]="comp" [required]="required"></app-outer>
     <br/>
     <br/>
     <input type="text" name="val3" [(ngModel)]="val3" required/>

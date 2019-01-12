@@ -29,19 +29,6 @@ export class InnerOneComponent implements OnInit, ControlValueAccessor, AfterVie
 
   }
 
-  // @Input()
-  // set isRequired(isRequired: boolean) {
-  //   // console.log('setting ' + isRequired);
-  //   // if (isRequired !== this._isRequired) {
-  //   //   this.reregisterControl();
-  //   // }
-  //   this._isRequired = isRequired;
-  // }
-
-  // get isRequired(): boolean {
-  //   return this._isRequired;
-  // }
-
   ngAfterViewChecked() {
     if (!this.registered) {
       if (this.modelGroup && this.modelGroup.control && this.one) {
@@ -50,16 +37,6 @@ export class InnerOneComponent implements OnInit, ControlValueAccessor, AfterVie
       }
     }
   }
-
-  // reregisterControl() {
-  //   if (this.registered) {
-  //     if (this.modelGroup && this.modelGroup.control && this.one) {
-  //       this.modelGroup.control.removeControl('one');
-  //       this.modelGroup.control.registerControl('one', this.one.control);
-  //       this.registered = true;
-  //     }
-  //   }
-  // }
 
   onChange = (value: string) => {};
 
