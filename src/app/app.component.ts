@@ -14,6 +14,7 @@ export class AppComponent implements AfterViewChecked {
   required = false;
   val3 = 'val3Init';
   links: any[] = [];
+  links2: any[] = [];
 
   @ViewChild('mainForm') public mainForm: NgForm;
   @ViewChild('nameCtrl') public nameCtrl: NgModelGroup;
@@ -23,17 +24,41 @@ export class AppComponent implements AfterViewChecked {
   ngAfterViewChecked() {
     this.cd.detectChanges();
     this.links = [];
+    this.links2 = [];
+
+    // resolves an array of forkjoins
     this.scratch().forEach(rslt =>
       rslt.subscribe(res =>
-        this.links.push({first: res[0].name, mapped: res[1]}) ));
-    //results in [{first:'a', mapped:'aa'}, {first:'b', mapped:'bb'}, {first:'c', mapped:'cc'}]
+        this.links.push({first: res[0].name, mapped: res[1]})
+        )
+      );
+
+
+    // resolves a forkjoin of forkjoins
+    this.scratchObs().subscribe(ress =>
+        this.links2 = ress.map(res =>
+          ({first: res[0].name, mapped: res[1]})
+        )
+      );
+
+    // 1st results in [{first:"a", mapped:"aa"}, {first:"b", mapped:"bb"}, {first:"c", mapped:"cc"}]
+    // 2nd results in [{first: "d", mapped: "dd"}, {first: "e", mapped: "ee"}, {first: "f", mapped: "ff"}]
   }
 
+  // returns array of forkjoins
   scratch(): Observable<[{ id: number; name: string; }, string]>[] {
     const parents = [{id: 1, name: 'a'}, {id: 2, name: 'b'}, {id: 3, name: 'c'}];
 
     return parents.map(thrt => forkJoin(of(thrt), this.doubleName(thrt)));
   }
+
+  // returns forkjoin of forkjoins
+  scratchObs(): Observable<[{ id: number; name: string; }, string][]> {
+    const parents = [{id: 4, name: 'd'}, {id: 5, name: 'e'}, {id: 6, name: 'f'}];
+
+    return forkJoin(parents.map(thrt => forkJoin(of(thrt), this.doubleName(thrt))));
+  }
+
 
   doubleName(parent: any): Observable<string> {
     return of(parent.name + parent.name);
@@ -47,5 +72,6 @@ export class AppComponent implements AfterViewChecked {
     alert(`inputsValid: ${this.mainForm.valid}`);
     // console.log(this.comp);
     console.log(this.links);
+    console.log(this.links2);
   }
 }
