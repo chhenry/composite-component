@@ -48,7 +48,7 @@ export class OuterComponent implements OnInit, ControlValueAccessor, Validator {
             )
           );
 
-      return inputsValid ? null : {outer: {valid: false}};
+      return inputsValid ? null : {required: true};
   }
 
   ngOnInit() { }
