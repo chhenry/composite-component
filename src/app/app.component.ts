@@ -27,6 +27,7 @@ export class AppComponent implements AfterViewChecked {
     this.links2 = [];
 
     // resolves an array of forkjoins
+    // *note multiple suscribes
     this.scratch().forEach(rslt =>
       rslt.subscribe(res =>
         this.links.push({first: res[0].name, mapped: res[1]})
@@ -35,6 +36,7 @@ export class AppComponent implements AfterViewChecked {
 
 
     // resolves a forkjoin of forkjoins
+    // *note only one suscribe
     this.scratchObs().subscribe(ress =>
         this.links2 = ress.map(res =>
           ({first: res[0].name, mapped: res[1]})
