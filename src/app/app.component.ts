@@ -26,6 +26,7 @@ export class AppComponent implements AfterViewChecked {
     this.scratch().forEach(rslt =>
       rslt.subscribe(res =>
         this.links.push({first: res[0].name, mapped: res[1]}) ));
+    //results in [{first:'a', mapped:'aa'}, {first:'b', mapped:'bb'}, {first:'c', mapped:'cc'}]
   }
 
   scratch(): Observable<[{ id: number; name: string; }, string]>[] {
